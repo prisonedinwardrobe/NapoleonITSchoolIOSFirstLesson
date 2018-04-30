@@ -19,7 +19,7 @@ class ProductViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     
-    var product: Product?
+    public var product: Product?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +29,12 @@ class ProductViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+
+        loadProduct()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        loadProduct()
     }
 
     @IBAction func actionBuy(_ sender: UIButton) {
@@ -44,7 +42,9 @@ class ProductViewController: UIViewController {
     }
     
     func setupViewController() {
-        product = Product(imageName: "image-product", title: "iPhone 6S Rose Gold 64GB почти новый все чеки", price: 18500)
+        if product == nil {
+            product = Product(imageName: "image-product", title: "iPhone 6S Rose Gold 64GB почти новый все чеки", price: 18500)
+        }
     }
 
     func loadProduct() {
@@ -53,9 +53,10 @@ class ProductViewController: UIViewController {
             return
         }
         
+        title = product.title
         mainImageView.image = UIImage(named: product.imageName)
         titleLabel.text = product.title
-        priceLabel.text = "\(product.price) ₽";
+        priceLabel.text = "\(product.price) ₽"
     }
     
 }
