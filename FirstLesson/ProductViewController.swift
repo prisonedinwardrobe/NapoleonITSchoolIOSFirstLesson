@@ -30,7 +30,7 @@ class ProductViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadProduct()
+        //loadProduct()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,14 +42,9 @@ class ProductViewController: UIViewController {
     }
     
     func setupViewController() {
-        if product == nil {
-            product = Product(imageName: "image-product", title: "iPhone 6S Rose Gold 64GB почти новый все чеки", price: 18500)
-        }
-    }
-
-    func loadProduct() {
+        product = product ?? Product(imageName: "image-product", title: "iPhone 6S Rose Gold 64GB почти новый все чеки", price: 18500)
+        
         guard let product = product else {
-            print("<ProductViewController: loadProduct> ERROR product is nil!!!")
             return
         }
         
@@ -57,6 +52,12 @@ class ProductViewController: UIViewController {
         mainImageView.image = UIImage(named: product.imageName)
         titleLabel.text = product.title
         priceLabel.text = "\(product.price) ₽"
+    }
+    
+    
+    func loadProduct() {
+        //в SetupViewController заданы параметры дефолтного Product
+        //здесь можно в будущем задать парметры кастомного Product или загрузку его из сети
     }
     
 }
